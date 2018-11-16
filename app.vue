@@ -79,6 +79,7 @@
 
 					// 获取到DOM
 					const $list = this.$refs.list;
+					// 如果获取到的内容高度不足以出现滚动条时，再多获取一天的数据，使其出现滚动条，从而可以通过滚动动作触发加载更多的数据
 					if ($list.scrollHeight === document.body.clientHeight) {
 						this.dailyTime -= 86400000;
 						const prevDay = $.prevDay(this.dailyTime + 86400000);
@@ -102,7 +103,6 @@
 				if (this.type === 'daily' || this.isLoading) 
 					return;
 				// 已经滚动的距离加页面的高度等于内容区域高度时，视为接触底部
-				console.log($list.scrollTop + ':' + document.body.clientHeight + ':' + $list.scrollHeight);
 				if (($list.scrollHeight - ($list.scrollTop + document.body.clientHeight)) <= 1) {
 					// 时间相对减少一天
 					this.dailyTime -= 86400000;
